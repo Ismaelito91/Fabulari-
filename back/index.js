@@ -1,20 +1,21 @@
 require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
+const app = require('./app'); // Importation de app.js
+const pool = require('./config/db'); // Importation de la BDD
 
-const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
-app.use(bodyParser.json());
+// Test de connexion à la BDD avant de lancer le serveur
+(async () => {
+  try {
+    await pool.query('SELECT NOW()');
+    console.log('✅ Connected to PostgreSQL database at startup');
+  } catch (err) {
+    console.error('❌ Failed to connect to PostgreSQL database at startup:', err);
+  }
 
-// Route test
-app.get('/', (req, res) => {
-  res.send('Bienvenue sur l\'API Fabulari!');
-});
-
-// Lancer le serveur
-app.listen(PORT, () => {
-  console.log(`Serveur backend lancé sur http://localhost:${PORT}`);
-});
+  // Lancer le serveur
+  app.listen(PORT, () => {
+    console.log(`🚀 Serveur backend lancé sur http://localhost:${PORT}`);
+  });
+})();
