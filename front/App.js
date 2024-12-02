@@ -1,20 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { Text, View } from 'react-native';
+import axios from 'axios';
 
-export default function App() {
+const App = () => {
+  useEffect(() => {
+    axios.get('http://localhost:3000')
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error('Erreur lors de l\'appel à l\'API:', error);
+      });
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View>
+      <Text>Bienvenue dans Fabulari !</Text>
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
