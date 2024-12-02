@@ -1,21 +1,19 @@
-# Ignore node_modules directory
-front/node_modules/
-back/node_modules/
+# Node modules
+node_modules/
 
-# Ignore log files
-*.log
-
-# Ignore environment variable files
+# Environment variables
 .env
 
-# Ignore build directories
-dist/
-build/
+# Config files
+config/config.json
 
-# Ignore temporary files
-*.tmp
-*.swp
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Ignore OS generated files
+# OS generated files
 .DS_Store
 Thumbs.db
